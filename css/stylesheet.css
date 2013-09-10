@@ -1,0 +1,17 @@
+html {
+	font-size: 100%;
+}
+
+body {
+	font-family: Arial, Helvetica, Verdana, "Lucida Grande", sans-serif;
+	color: #FFF;	
+	font-size: 62.5%; 
+	margin: 0;
+	border: 0;
+	background: #000 url('./images/bg-homepage.jpg') no-repeat 50% 0 fixed;
+	text-shadow:#000 -1px -1px 1px;
+}
+.grande {
+	font-size: 36px;
+	font-family: Arial, Helvetica, Verdana, "Lucida Grande", sans-serif;
+}

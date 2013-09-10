@@ -1,0 +1,83 @@
+<?php 
+session_start();
+error_reporting(E_ALL ^ E_NOTICE);
+require_once('conexion.php');  
+  ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+<link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<table width="549" height="210" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="235" align="center"><img src="imagenes/banner parte de arriba.png" alt="banner header" width="1024" height="228" /></td>
+  </tr>
+</table>
+<table width="1030" height="49" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="220" align="center"><img src="imagenes/inicio.png" width="222" height="72" alt="inicio" /></td>
+    <td width="210" align="center"><img src="imagenes/admin.png" width="212" height="72" alt="administrar" /></td>
+    <td width="183" align="center"><img src="imagenes/foro.png" width="185" height="72" alt="foro" /></td>
+    <td width="399" align="center"><img src="imagenes/registrarse.png" width="404" height="72" alt="registro" /></td>
+  </tr>
+</table>
+<div align="center"></div>
+<table width="200" border="0" align="center">
+  <tr>
+    <td><img src="imagenes/lineas.png" width="1024" height="58" alt="lineas" /></td>
+  </tr>
+</table>
+<table width="1024" border="0" align="center">
+  <tr>
+    <td width="967" height="885" bgcolor="#000000">&nbsp;
+  
+<header>
+	<?php if($_SESSION['name']){
+		echo '<div id="sesion"><div id="sesion">'.$_SESSION['name']." ".$_SESSION['apelle'].'|| <a href="salir.php">Serrar Sesion</a></div></div>';
+		}else{ ?>
+    <div id='sesion'><div id='sesion'><a href="entrar-user.php">Inisiar Sesion</a> O <a href="login.php">Registrarme</a></div></div> 
+    <?php } ?> 
+</header>
+<nav>
+  
+        <?php if($_SESSION['niv']=='2'){echo '<a href="enviar-noticias.php"></a>';} ?>
+</nav>
+<section id='cuerpo'>
+    
+      <section id='contenido'>
+      <?php 
+	  $id=$_GET['id'];
+	  mysql_select_db($bd,$conexion);
+$query = "SELECT * FROM noticias WHERE id_noticia='$id'";
+$consulta = mysql_query($query,$conexion);
+if($row=mysql_fetch_assoc($consulta))
+{
+?>
+        <article id='titulo'><h2><?php echo $row['titulo']; ?></h2>
+        </article>     
+        <article id='noticias'><h2><?php echo $row['descripcion']; ?></h2></article>
+          <br>
+          <?php echo $row['texto']; ?>
+          <div id="mensaje">
+<a href="index.php">Ir a la Pagina Principal</a>
+               </div>
+               <?php }mysql_free_result($consulta); ?>
+ 
+      </section>
+     
+
+<aside>
+  <div id='publicaciones'><h2>Ultimas publicaciones </h2></div>  
+<?php  require_once('titulares.php');?>
+</aside>
+</section>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>
